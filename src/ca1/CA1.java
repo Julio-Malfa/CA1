@@ -30,11 +30,12 @@ public class CA1 {
                 String secondName = splitStr[1];
                 String numofClasses = reader.readLine();
                 String studentNumber = reader.readLine();
-                
+                // Validating first name
                 if (!firstName.matches("[a-zA-Z]+")){
                     System.out.println("Invalid first name: " + firstName);
                 }
-                if (!secondName.matches("[a-zA-Z]+")) {
+                // Validating second name
+                if (!secondName.matches("[a-zA-Z0-9]+")) {
                     System.out.println("Invalid second name: " + secondName);
                 }
                 //lets test if the variables created will display

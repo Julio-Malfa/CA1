@@ -5,7 +5,9 @@
 package ca1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -23,24 +25,23 @@ public class CA1 {
         try {
             BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
             String student;
-            
+            //Reading and defining student's information
             while ((student = reader.readLine()) !=null) {
                 String[] splitStr = student.split(" ");
                 String firstName = splitStr[0];
                 String secondName = splitStr[1];
                 String numofClasses = reader.readLine();
                 String studentNumber = reader.readLine();
-                // Validating first name
-                if (!firstName.matches("[a-zA-Z]+")){
-                    System.out.println("Invalid first name: " + firstName);
+                
+                //Writing validated student in status.txt (place holder)
+                if (ValidStudent(firstName, secondName, numofClasses, studentNumber)){
+                BufferedWriter bw = new BufferedWriter(new FileWriter("status.txt", true));
+                bw.write(studentNumber + " - " + secondName + "\n" + numofClasses + "\n");
+                bw.close();                
                 }
-                // Validating second name
-                if (!secondName.matches("[a-zA-Z0-9]+")) {
-                    System.out.println("Invalid second name: " + secondName);
-                }
-                //lets test if the variables created will display
-                System.out.println(firstName + " " + secondName + " " + numofClasses + " " + studentNumber);
-            }
+                
+            }         
+        
             reader.close();
         } catch (IOException e){
             System.out.println("Error reading the file: Student.txt");
@@ -62,12 +63,12 @@ public class CA1 {
         
         //Validating number of classes between 1 to 8 (1 and 8 included)
         try {
-            int numofClasses = Integer.parseInt(numofClasses);
-            if (numofClasses < 1 || numofClasses > 8) {
+            int numofClassesInt = Integer.parseInt(numofClasses);
+            if (numofClassesInt < 1 || numofClassesInt > 8) {
                 System.out.println("Invalid number of classes: " + numofClasses);
                 return false;
             }
-        } catch (IOException e) {
+        } catch (NumberFormatException e) {
             System.out.println("Invalid number of classes: " + numofClasses);
             return false;
         }

@@ -46,5 +46,38 @@ public class CA1 {
             System.out.println("Error reading the file: Student.txt");
         }
     }
-    
+// Validating Student information (First Name, Second Name, Num of Classes and Student Number)
+    private static boolean ValidStudent(String firstName, String secondName, String numofClasses, String studentNumber){
+        //Validating first name with letters only
+        if(!firstName.matches("[a-zA-Z]+")){
+            System.out.println("Invalid first name: " + firstName);
+            return false;
+        }
+        
+        //Validating second name with letters and or numbers
+        if (!secondName.matches("[a-zA-Z0-9]+")) {
+            System.out.println("Invalid second name: " + secondName);
+            return false;
+        }
+        
+        //Validating number of classes between 1 to 8 (1 and 8 included)
+        try {
+            int numofClasses = Integer.parseInt(numofClasses);
+            if (numofClasses < 1 || numofClasses > 8) {
+                System.out.println("Invalid number of classes: " + numofClasses);
+                return false;
+            }
+        } catch (IOException e) {
+            System.out.println("Invalid number of classes: " + numofClasses);
+            return false;
+        }
+        
+        //Validating student number (placeholder)
+        if (studentNumber.matches("\\d{2}[a-aA-Z]{2}\\d+")) {
+            System.out.println("Invalid student number: " + studentNumber);
+            return false;
+        }
+        
+        return true;
+    }
 }
